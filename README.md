@@ -8,12 +8,83 @@
 npm install ttest
 ```
 
-## Documentation
+## Example
 
-```JavaScript
+```javascript
 var ttest = require('ttest');
 
+// One sample t-test
+ttest([0,1,1,1], {mu: 1}).valid() // true
+
+// Two sample t-test
+ttest([1,1,1,1], [2,2,2,2], {mu: -1}).valid() // true
 ```
+
+## Documentation
+
+```javascript
+var ttest = require('ttest');
+```
+
+The `ttest` module supports both one and two sample t-testing. If one array
+of data is given its a one sample t-test, and if two data arrays are given
+its a two sample t-test.
+
+_Note: it is assumed that the variance of the two samples are equal._
+
+In both cases you can also pass an extra optional object, there takes the
+following properties:
+
+```javascript
+var options = {
+  // Default: 0
+  // One sample case: this is the µ that the mean will be compared with
+  // Two sample case: this is the ∂ value that the mean diffrence will be compared with
+  mu: Number,
+
+  // Default: 0.05
+  // The significance level of the test
+  alpha: Number,
+
+  // Default "not equal"
+  // What should the alternative hypothesis be
+  // - One sample case: could the mean be less, greater or not equal to mu property
+  // - Two sample case: could the mean diffrence be less, greater or not equal to mu property
+  alternative: "less" || "greater" || "not equal"
+};
+```
+
+The t-test object is finally created by calling the `ttest` constructor.
+
+```javascript
+var res = ttest(sample, options);
+var res = ttest(sampleA, sampleB, options);
+```
+
+When the `ttest` object is created you can get the following information.
+
+##### ttest.testValue()
+
+Returns the `t` value also called the `statistic` value.
+
+##### ttest.pValue()
+
+Returns the `p-value`.
+
+##### ttest.confidence()
+
+Returns an array containing the confidence interval, where the confidence level
+is calculated as `1 - options.alpha`. Where the lower limit has index `0` and
+the upper limit has index `1`. If the alternative hypothesis is `less` or
+`greater` one of the sides will be `+/- Infinity`.
+
+##### ttest.valid()
+
+Simply returns true if the `p-value` is greater or equal to the `alpha` value.
+
+##### ttest.freedom()
+
+Returns the degrees of freedom used in the t-test.
 
 ##License
 
