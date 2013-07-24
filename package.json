@@ -16,7 +16,7 @@
     "student t"
   ],
   "dependencies": {
-    "summary": "0.2.x",
+    "summary": "0.3.x",
     "distributions": "0.2.x"
   },
   "devDependencies": {

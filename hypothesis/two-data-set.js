@@ -8,8 +8,8 @@ var AbstactStudentT = require('./abstact.js');
 function StudentT(left, right, options) {
   AbstactStudentT.call(this, options);
 
-  var leftsummary = new Summary(left);
-  var rightsummary = new Summary(right);
+  var leftsummary = (left instanceof Summary) ? left : new Summary(left);
+  var rightsummary = (right instanceof Summary) ? right : new Summary(right);
 
   this._freedom = leftsummary.size() + rightsummary.size() - 2;
   var commonVariance = ((leftsummary.size() - 1) * leftsummary.variance() +

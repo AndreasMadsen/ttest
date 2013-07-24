@@ -26,11 +26,13 @@ ttest([1,1,1,1], [2,2,2,2], {mu: -1}).valid() // true
 var ttest = require('ttest');
 ```
 
-The `ttest` module supports both one and two sample t-testing. If one array
-of data is given its a one sample t-test, and if two data arrays are given
-its a two sample t-test.
+The `ttest` module supports both one and two sample t-testing, where it is
+assumed that the variance are equal.
 
-_Note: it is assumed that the variance of the two samples are equal._
+If one array of data is given its a one sample t-test, and if two data arrays
+are given its a two sample t-test.
+
+_Note: instead of a data array a [summary](https://github.com/AndreasMadsen/summary) object can also be used._
 
 In both cases you can also pass an extra optional object, there takes the
 following properties:

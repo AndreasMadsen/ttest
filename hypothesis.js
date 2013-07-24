@@ -2,19 +2,25 @@
 var OneDataSet = require('./hypothesis/one-data-set.js');
 var TwoDataSet = require('./hypothesis/two-data-set.js');
 
+var Summary = require('summary');
+
 var ALTERNATIVE_MAP = {
   "not equal": 0,
   "less": -1,
   "greater": 1
 };
 
+function isList(list) {
+  return (Array.isArray(list) || list instanceof Summary);
+}
+
 function hypothesis(left, right, options) {
   // Vertify required arguments
-  if (!Array.isArray(left)) {
+  if (!isList(left)) {
     throw new TypeError('left value in hypothesis test must be an array');
   }
 
-  if (!Array.isArray(right)) {
+  if (!isList(right)) {
     options = right;
     right = undefined;
   }
@@ -47,7 +53,7 @@ function hypothesis(left, right, options) {
   }
 
   // Perform the student's t test
-  if (Array.isArray(right)) {
+  if (isList(right)) {
     return new TwoDataSet(left, right, options);
   } else {
     return new OneDataSet(left, options);
