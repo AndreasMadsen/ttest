@@ -1,7 +1,7 @@
 {
   "name": "ttest",
   "description": "Perform the Student's t hypothesis test",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "author": "Andreas Madsen <amwebdk@gmail.com>",
   "main": "./hypothesis.js",
   "scripts": {
