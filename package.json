@@ -1,7 +1,7 @@
 {
   "name": "ttest",
   "description": "Perform the Student's t hypothesis test",
-  "version": "0.3.0",
+  "version": "0.3.1",
   "author": "Andreas Madsen <amwebdk@gmail.com>",
   "main": "./hypothesis.js",
   "scripts": {
@@ -20,11 +20,7 @@
     "distributions": "0.2.x"
   },
   "devDependencies": {
-    "tap": "0.4.x"
+    "tap": "0.6.x"
   },
-  "license": "MIT",
-  "engines": {
-    "node": "0.10",
-    "npm": "1"
-  }
+  "license": "MIT"
 }
