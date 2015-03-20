@@ -17,7 +17,7 @@ var ttest = require('ttest');
 ttest([0,1,1,1], {mu: 1}).valid() // true
 
 // Two sample t-test
-ttest([1,1,1,1], [2,2,2,2], {mu: -1}).valid() // true
+ttest([0,1,1,1], [1,2,2,2], {mu: -1}).valid() // true
 ```
 
 ## Documentation
