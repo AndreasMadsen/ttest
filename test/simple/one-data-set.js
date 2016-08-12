@@ -4,6 +4,8 @@ const test = require('tap').test;
 const ttest = require('../../hypothesis.js');
 const equals = require('../equals.js');
 
+const summary = require('summary');
+
 test('testing not equal alternative', function (t) {
   const res = ttest([1, 2, 2, 2, 4], {
     mu: 2,
@@ -27,12 +29,11 @@ test('testing not equal alternative', function (t) {
   t.end();
 });
 
-/*
 test('testing summary as argument', function (t) {
-  var res = ttest(summary([1, 2, 2, 2, 4]), {
+  const res = ttest(summary([1, 2, 2, 2, 4]), {
     mu: 2,
     alpha: 0.05,
-    alternative: "not equal"
+    alternative: 'not equal'
   });
 
   equals(t, res, {
@@ -52,10 +53,10 @@ test('testing summary as argument', function (t) {
 });
 
 test('testing less alternative', function (t) {
-  var res = ttest([1, 2, 2, 2, 4], {
+  const res = ttest([1, 2, 2, 2, 4], {
     mu: 2,
     alpha: 0.05,
-    alternative: "less"
+    alternative: 'less'
   });
 
   equals(t, res, {
@@ -75,10 +76,10 @@ test('testing less alternative', function (t) {
 });
 
 test('testing greater alternative', function (t) {
-  var res = ttest([1, 2, 2, 2, 4], {
+  const res = ttest([1, 2, 2, 2, 4], {
     mu: 2,
     alpha: 0.05,
-    alternative: "greater"
+    alternative: 'greater'
   });
 
   equals(t, res, {
@@ -96,4 +97,3 @@ test('testing greater alternative', function (t) {
 
   t.end();
 });
-*/
