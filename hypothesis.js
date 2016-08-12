@@ -2,17 +2,22 @@
 
 const OneDataSet = require('./hypothesis/one-data-set.js');
 const TwoDataSet = require('./hypothesis/two-data-set.js');
+const Welch = require('./hypothesis/welch.js');
 
 const Summary = require('summary');
 
-const ALTERNATIVE_MAP = {
+const ALTERNATIVE_MAP = Object.assign(Object.create(null), {
   'not equal': 0,
   'less': -1,
   'greater': 1
-};
+});
 
 function isList(list) {
   return (Array.isArray(list) || list instanceof Summary);
+}
+
+function toSummary(data) {
+  return (data instanceof Summary) ? data : new Summary(data);
 }
 
 function hypothesis(left, right, options) {
@@ -27,17 +32,24 @@ function hypothesis(left, right, options) {
   }
 
   // Set the default options
-  if (!options) options = {};
+  options = Object.assign({
+    mu: 0,
+    varEqual: false,
+    alpha: 0.05,
+    alternative: 'not equal'
+  }, options);
 
-  options = {
-    mu: options.hasOwnProperty('mu') ? options.mu : 0,
-    alpha: options.hasOwnProperty('alpha') ? options.alpha : 0.05,
-    alternative: options.hasOwnProperty('alternative') ? ALTERNATIVE_MAP[options.alternative] : 0
-  };
+  // Convert alternative value
+  options.alternative = ALTERNATIVE_MAP[options.alternative];
 
   // Vertify mu option
   if (typeof options.mu !== 'number') {
     throw new TypeError('alpha option must be a number');
+  }
+
+  // Vertify varEqual option
+  if (typeof options.varEqual !== 'boolean') {
+    throw new TypeError('varEqual option must be a boolean');
   }
 
   // Vertify alpha option
@@ -55,9 +67,13 @@ function hypothesis(left, right, options) {
 
   // Perform the student's t test
   if (isList(right)) {
-    return new TwoDataSet(left, right, options);
+    if (options.varEqual) {
+      return new TwoDataSet(toSummary(left), toSummary(right), options);
+    } else {
+      return new Welch(toSummary(left), toSummary(right), options);
+    }
   } else {
-    return new OneDataSet(left, options);
+    return new OneDataSet(toSummary(left), options);
   }
 }
 module.exports = hypothesis;
