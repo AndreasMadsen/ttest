@@ -1,15 +1,14 @@
+'use strict';
 
-var test = require('tap').test;
-var ttest = require('../../hypothesis.js');
-var equals = require('../equals.js');
-
-var summary = require('summary');
+const test = require('tap').test;
+const ttest = require('../../hypothesis.js');
+const equals = require('../equals.js');
 
 test('testing not equal alternative', function (t) {
-  var res = ttest([1, 2, 2, 2, 4], {
+  const res = ttest([1, 2, 2, 2, 4], {
     mu: 2,
     alpha: 0.05,
-    alternative: "not equal"
+    alternative: 'not equal'
   });
 
   equals(t, res, {

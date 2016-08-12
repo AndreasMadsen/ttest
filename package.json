@@ -1,13 +1,13 @@
 {
   "name": "ttest",
   "description": "Perform the Student's t hypothesis test",
-  "version": "0.3.1",
+  "version": "1.0.0",
   "author": "Andreas Madsen <amwebdk@gmail.com>",
   "main": "./hypothesis.js",
   "scripts": {
-    "test": "tap test/simple/*"
+    "test": "tap test/simple/* && eslint ."
   },
-  "repository" : {
+  "repository": {
     "type": "git",
     "url": "git://github.com/AndreasMadsen/ttest.git"
   },
@@ -17,10 +17,11 @@
   ],
   "dependencies": {
     "summary": "0.3.x",
-    "distributions": "0.2.x"
+    "distributions": "^1.0.0"
   },
   "devDependencies": {
-    "tap": "0.6.x"
+    "eslint": "^3.2.2",
+    "tap": "^6.3.0"
   },
   "license": "MIT"
 }

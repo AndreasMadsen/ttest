@@ -1,13 +1,14 @@
+'use strict';
 
-var OneDataSet = require('./hypothesis/one-data-set.js');
-var TwoDataSet = require('./hypothesis/two-data-set.js');
+const OneDataSet = require('./hypothesis/one-data-set.js');
+const TwoDataSet = require('./hypothesis/two-data-set.js');
 
-var Summary = require('summary');
+const Summary = require('summary');
 
-var ALTERNATIVE_MAP = {
-  "not equal": 0,
-  "less": -1,
-  "greater": 1
+const ALTERNATIVE_MAP = {
+  'not equal': 0,
+  'less': -1,
+  'greater': 1
 };
 
 function isList(list) {

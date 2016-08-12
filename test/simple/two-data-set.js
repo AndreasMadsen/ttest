@@ -1,15 +1,17 @@
+'use strict';
 
-var test = require('tap').test;
-var ttest = require('../../hypothesis.js');
-var equals = require('../equals.js');
+const test = require('tap').test;
+const ttest = require('../../hypothesis.js');
+const equals = require('../equals.js');
 
-var summary = require('summary');
+const summary = require('summary');
 
 test('testing not equal alternative', function (t) {
-  var res = ttest([1, 2, 2, 2, 4], [0, 3, 3, 3, 2], {
+  const res = ttest([1, 2, 2, 2, 4], [0, 3, 3, 3, 2], {
     mu: 1,
+    varEqual: true,
     alpha: 0.05,
-    alternative: "not equal"
+    alternative: 'not equal'
   });
 
   equals(t, res, {
@@ -29,10 +31,11 @@ test('testing not equal alternative', function (t) {
 });
 
 test('testing not equal alternative', function (t) {
-  var res = ttest(summary([1, 2, 2, 2, 4]), summary([0, 3, 3, 3, 2]), {
+  const res = ttest(summary([1, 2, 2, 2, 4]), summary([0, 3, 3, 3, 2]), {
     mu: 1,
+    varEqual: true,
     alpha: 0.05,
-    alternative: "not equal"
+    alternative: 'not equal'
   });
 
   equals(t, res, {
@@ -52,10 +55,11 @@ test('testing not equal alternative', function (t) {
 });
 
 test('testing less alternative', function (t) {
-  var res = ttest([1, 2, 2, 2, 4], [0, 3, 3, 3, 2], {
+  const res = ttest([1, 2, 2, 2, 4], [0, 3, 3, 3, 2], {
     mu: 1,
+    varEqual: true,
     alpha: 0.05,
-    alternative: "less"
+    alternative: 'less'
   });
 
   equals(t, res, {
@@ -75,10 +79,11 @@ test('testing less alternative', function (t) {
 });
 
 test('testing greater alternative', function (t) {
-  var res = ttest([1, 2, 2, 2, 4], [0, 3, 3, 3, 2], {
+  const res = ttest([1, 2, 2, 2, 4], [0, 3, 3, 3, 2], {
     mu: 1,
+    varEqual: true,
     alpha: 0.05,
-    alternative: "greater"
+    alternative: 'greater'
   });
 
   equals(t, res, {
