@@ -6,8 +6,8 @@ function AbstactStudentT(options) {
 module.exports = AbstactStudentT;
 
 AbstactStudentT.prototype.testValue = function () {
-  const dif = (this._mean - this._options.mu);
-  return dif / this._fac;
+  const diff = (this._mean - this._options.mu);
+  return diff / this._se;
 };
 
 AbstactStudentT.prototype.pValue = function () {
@@ -27,13 +27,13 @@ AbstactStudentT.prototype.confidence = function () {
   let pm;
   switch (this._options.alternative) {
   case 1: // mu > mu[0]
-    pm = Math.abs(this._dist.inv(this._options.alpha)) * this._fac;
+    pm = Math.abs(this._dist.inv(this._options.alpha)) * this._se;
     return [this._mean - pm, Infinity];
   case -1: // mu < mu[0]
-    pm = Math.abs(this._dist.inv(this._options.alpha)) * this._fac;
+    pm = Math.abs(this._dist.inv(this._options.alpha)) * this._se;
     return [-Infinity, this._mean + pm];
   case 0: // mu != mu[0]
-    pm = Math.abs(this._dist.inv(this._options.alpha / 2)) * this._fac;
+    pm = Math.abs(this._dist.inv(this._options.alpha / 2)) * this._se;
     return [this._mean - pm, this._mean + pm];
   }
 };
@@ -43,5 +43,5 @@ AbstactStudentT.prototype.valid = function () {
 };
 
 AbstactStudentT.prototype.freedom = function () {
-  return this._freedom;
+  return this._df;
 }
