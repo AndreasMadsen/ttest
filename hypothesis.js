@@ -13,11 +13,17 @@ const ALTERNATIVE_MAP = Object.assign(Object.create(null), {
 });
 
 function isList(list) {
-  return (Array.isArray(list) || list instanceof Summary);
+  return Array.isArray(list) || ['mean', 'variance', 'size'].reduce(function (acc, name) {
+    return acc && list && typeof list[name] === 'function'
+  }, true)
 }
 
 function toSummary(data) {
-  return (data instanceof Summary) ? data : new Summary(data);
+  if (Array.isArray(data)) {
+    return new Summary(data)
+  }
+
+  return data
 }
 
 function hypothesis(left, right, options) {
