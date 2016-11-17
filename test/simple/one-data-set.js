@@ -52,11 +52,11 @@ test('testing summary as argument', function (t) {
   t.end();
 });
 
-test('testing summary-like as argument', function (t) {
+test('testing plain object as argument', function (t) {
   const obj = {};
   const sum = summary([1, 2, 2, 2, 4]);
-  ['mean', 'variance', 'size'].forEach(function (func) {
-    obj[func] = sum[func].bind(sum);
+  ['mean', 'variance', 'size'].forEach(function (name) {
+    obj[name] = sum[name]();
   });
   const res = ttest(obj, {
     mu: 2,

@@ -14,16 +14,24 @@ const ALTERNATIVE_MAP = Object.assign(Object.create(null), {
 
 function isList(list) {
   return Array.isArray(list) || ['mean', 'variance', 'size'].reduce(function (acc, name) {
-    return acc && list && typeof list[name] === 'function'
-  }, true)
+    return acc && list && (typeof list[name] === 'function' || typeof list[name] === 'number');
+  }, true);
 }
 
-function toSummary(data) {
+function toData(data) {
+  const obj = {};
   if (Array.isArray(data)) {
-    return new Summary(data)
+    const summary = new Summary(data);
+    obj.mean = summary.mean();
+    obj.variance = summary.variance();
+    obj.size = summary.size();
+  } else {
+    ['mean', 'variance', 'size'].forEach(function (name) {
+      obj[name] = typeof data[name] === 'function' ? data[name]() : data[name];
+    })
   }
 
-  return data
+  return obj;
 }
 
 function hypothesis(left, right, options) {
@@ -74,12 +82,12 @@ function hypothesis(left, right, options) {
   // Perform the student's t test
   if (isList(right)) {
     if (options.varEqual) {
-      return new TwoDataSet(toSummary(left), toSummary(right), options);
+      return new TwoDataSet(toData(left), toData(right), options);
     } else {
-      return new Welch(toSummary(left), toSummary(right), options);
+      return new Welch(toData(left), toData(right), options);
     }
   } else {
-    return new OneDataSet(toSummary(left), options);
+    return new OneDataSet(toData(left), options);
   }
 }
 module.exports = hypothesis;
