@@ -12,35 +12,38 @@ const ALTERNATIVE_MAP = Object.assign(Object.create(null), {
   'greater': 1
 });
 
-function isList(list) {
+function isSummary(data) {
+  return ['mean', 'variance', 'size'].reduce(function (acc, name) {
+    return acc && data && typeof data[name] === 'function';
+  }, true);
+}
+
+function isCompatible(list) {
   return Array.isArray(list) || ['mean', 'variance', 'size'].reduce(function (acc, name) {
     return acc && list && (typeof list[name] === 'function' || typeof list[name] === 'number');
   }, true);
 }
 
 function toData(data) {
-  const obj = {};
-  if (Array.isArray(data)) {
-    const summary = new Summary(data);
-    obj.mean = summary.mean();
-    obj.variance = summary.variance();
-    obj.size = summary.size();
+  if (Array.isArray(data) || isSummary(data)) {
+    const summary = isSummary(data) ? data : new Summary(data);
+    return {
+      mean: summary.mean(),
+      variance: summary.variance(),
+      size: summary.size()
+    };
   } else {
-    ['mean', 'variance', 'size'].forEach(function (name) {
-      obj[name] = typeof data[name] === 'function' ? data[name]() : data[name];
-    })
+    return data;
   }
-
-  return obj;
 }
 
 function hypothesis(left, right, options) {
   // Vertify required arguments
-  if (!isList(left)) {
+  if (!isCompatible(left)) {
     throw new TypeError('left value in hypothesis test must be an array');
   }
 
-  if (!isList(right)) {
+  if (!isCompatible(right)) {
     options = right;
     right = undefined;
   }
@@ -80,7 +83,7 @@ function hypothesis(left, right, options) {
   }
 
   // Perform the student's t test
-  if (isList(right)) {
+  if (isCompatible(right)) {
     if (options.varEqual) {
       return new TwoDataSet(toData(left), toData(right), options);
     } else {
