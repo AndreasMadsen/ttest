@@ -13,15 +13,21 @@ const ALTERNATIVE_MAP = Object.assign(Object.create(null), {
 });
 
 function isSummary(data) {
-  return ['mean', 'variance', 'size'].reduce(function (acc, name) {
-    return acc && data && typeof data[name] === 'function';
-  }, true);
+  return data && (typeof data.mean === 'function' &&
+                  typeof data.variance === 'function' &&
+                  typeof data.size === 'function');
 }
 
-function isCompatible(list) {
-  return Array.isArray(list) || ['mean', 'variance', 'size'].reduce(function (acc, name) {
-    return acc && list && (typeof list[name] === 'function' || typeof list[name] === 'number');
-  }, true);
+function isCalculated(data) {
+  return data && (typeof data.mean === 'number' &&
+                  typeof data.variance === 'number' &&
+                  typeof data.size === 'number');
+}
+
+function isCompatible(structure) {
+  return Array.isArray(structure) ||
+         isSummary(structure) ||
+         isCalculated(structure);
 }
 
 function toData(data) {
@@ -40,7 +46,9 @@ function toData(data) {
 function hypothesis(left, right, options) {
   // Vertify required arguments
   if (!isCompatible(left)) {
-    throw new TypeError('left value in hypothesis test must be an array');
+    throw new TypeError(
+      'left value in hypothesis test must be an array or data summary'
+    );
   }
 
   if (!isCompatible(right)) {
