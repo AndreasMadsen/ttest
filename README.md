@@ -32,7 +32,25 @@ equal and none equal variance.
 If one array of data is given its a one sample t-test, and if two data arrays
 are given its a two sample t-test.
 
-_Note: instead of a data array a [summary](https://github.com/AndreasMadsen/summary) object can also be used._
+`ttest()` supports data in the following format:
+
+* as an array of values, e.g. `ttest([1, 2, 3], [1, 1, 1])`
+* as a [`Summary`](https://github.com/AndreasMadsen/summary) object,
+  e.g. `ttest(new Summary([1, 2, 3]), new Summary([1, 1, 1]))`
+* as an object with the following properties: `mean`, `variance`,
+  `size`, e.g.
+
+```js
+ttest({
+  mean: 123,
+  variance: 1,
+  size: 42
+}, {
+  mean: 100,
+  variance: 1,
+  size: 24
+})
+```
 
 In both cases you can also pass an extra optional object, there takes the
 following properties:

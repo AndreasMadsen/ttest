@@ -12,21 +12,38 @@ const ALTERNATIVE_MAP = Object.assign(Object.create(null), {
   'greater': 1
 });
 
-function isList(list) {
-  return (Array.isArray(list) || list instanceof Summary);
+function isSummary(data) {
+  return ['mean', 'variance', 'size'].reduce(function (acc, name) {
+    return acc && data && typeof data[name] === 'function';
+  }, true);
 }
 
-function toSummary(data) {
-  return (data instanceof Summary) ? data : new Summary(data);
+function isCompatible(list) {
+  return Array.isArray(list) || ['mean', 'variance', 'size'].reduce(function (acc, name) {
+    return acc && list && (typeof list[name] === 'function' || typeof list[name] === 'number');
+  }, true);
+}
+
+function toData(data) {
+  if (Array.isArray(data) || isSummary(data)) {
+    const summary = isSummary(data) ? data : new Summary(data);
+    return {
+      mean: summary.mean(),
+      variance: summary.variance(),
+      size: summary.size()
+    };
+  } else {
+    return data;
+  }
 }
 
 function hypothesis(left, right, options) {
   // Vertify required arguments
-  if (!isList(left)) {
+  if (!isCompatible(left)) {
     throw new TypeError('left value in hypothesis test must be an array');
   }
 
-  if (!isList(right)) {
+  if (!isCompatible(right)) {
     options = right;
     right = undefined;
   }
@@ -66,14 +83,14 @@ function hypothesis(left, right, options) {
   }
 
   // Perform the student's t test
-  if (isList(right)) {
+  if (isCompatible(right)) {
     if (options.varEqual) {
-      return new TwoDataSet(toSummary(left), toSummary(right), options);
+      return new TwoDataSet(toData(left), toData(right), options);
     } else {
-      return new Welch(toSummary(left), toSummary(right), options);
+      return new Welch(toData(left), toData(right), options);
     }
   } else {
-    return new OneDataSet(toSummary(left), options);
+    return new OneDataSet(toData(left), options);
   }
 }
 module.exports = hypothesis;
