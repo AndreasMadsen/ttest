@@ -18,12 +18,12 @@ test('testing not equal alternative', function (t) {
     valid: true,
     freedom: 7.769053117782910966582,
 
-    pValue: 0.2266153983841363017682,
+    pValue: 0.23056556843894693,
     testValue: -1.313064328597225660644,
 
     confidence: [
-      -1.765329169241792062195,
-      1.765329169241792062195
+      -1.80084417807539,
+      1.80084417807539
     ]
   });
 
@@ -42,12 +42,12 @@ test('testing not equal alternative', function (t) {
     valid: true,
     freedom: 7.769053117782910966582,
 
-    pValue: 0.2266153983841363017682,
+    pValue: 0.23056556843894693,
     testValue: -1.313064328597225660644,
 
     confidence: [
-      -1.765329169241792062195,
-      1.765329169241792062195
+      -1.80084417807539,
+      1.80084417807539
     ]
   });
 
@@ -66,12 +66,12 @@ test('testing less alternative', function (t) {
     valid: true,
     freedom: 7.769053117782910966582,
 
-    pValue: 0.1133076991920681508841,
+    pValue: 0.11528278421947352,
     testValue: -1.313064328597225660644,
 
     confidence: [
       -Infinity,
-      1.42166652935669435287
+      1.4428680787589634
     ]
   });
 
@@ -90,11 +90,11 @@ test('testing greater alternative', function (t) {
     valid: true,
     freedom: 7.769053117782910966582,
 
-    pValue: 0.8866923008079318213603,
+    pValue: 0.8847172157805265,
     testValue: -1.313064328597225660644,
 
     confidence: [
-      -1.421666529356694574915,
+      -1.4428680787589634,
       Infinity
     ]
   });
