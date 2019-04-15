@@ -1,15 +1,24 @@
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
-class AbstractStudentT {
-    constructor(_options) {
-        this._options = _options;
-    }
+import { Distribution } from 'distributions';
+
+import { IOptions } from '../ttest.d';
+
+
+export abstract class AbstractStudentT {
+    _mean!: number;
+    _se!: number;
+    _df!: number;
+    _dist!: Distribution;
+
+    protected constructor(private _options: IOptions) {}
+
     testValue() {
         const diff = this._mean - this._options.mu;
         return diff / this._se;
     }
-    pValue() {
+
+    pValue(): number {
         const t = this.testValue();
+
         switch (this._options.alternative) {
             case 1: // mu > mu[0]
                 return 1 - this._dist.cdf(t);
@@ -19,9 +28,9 @@ class AbstractStudentT {
                 return 2 * (1 - this._dist.cdf(Math.abs(t)));
         }
         return 0;
-    }
-    ;
-    confidence() {
+    };
+
+    confidence(): [number, number] {
         let pm;
         switch (this._options.alternative) {
             case 1: // mu > mu[0]
@@ -35,13 +44,13 @@ class AbstractStudentT {
                 return [this._mean - pm, this._mean + pm];
         }
         return [0, 0];
-    }
-    ;
+    };
+
     valid() {
         return this.pValue() >= this._options.alpha;
     }
+
     freedom() {
         return this._df;
     }
 }
-exports.AbstractStudentT = AbstractStudentT;
