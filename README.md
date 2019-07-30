@@ -51,8 +51,8 @@ const options = {
   mu: Number,
 
   // Default: false
-  // If true don't assume variance is equal and use the Welch approximation.
-  // This only applies of two samples are used.
+  // If false don't assume variance is equal and use the Welch approximation.
+  // This only applies if two samples are used.
   varEqual: Boolean,
 
   // Default: 0.05
