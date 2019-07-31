@@ -18,19 +18,19 @@ test('testing not equal alternative', function (t) {
     valid: true,
     freedom: 7.769053117782910966582,
 
-    pValue: 0.23056556843894693,
+    pValue: 0.22661539838413605,
     testValue: -1.313064328597225660644,
 
     confidence: [
-      -1.80084417807539,
-      1.80084417807539
+      -1.7653291692417925,
+      1.7653291692417925
     ]
   });
 
   t.end();
 });
 
-test('testing not equal alternative', function (t) {
+test('testing not equal alternative with summary', function (t) {
   const res = ttest(summary([1, 2, 2, 2, 4]), summary([0, 3, 3, 3, 2]), {
     mu: 1,
     varEqual: false,
@@ -42,12 +42,12 @@ test('testing not equal alternative', function (t) {
     valid: true,
     freedom: 7.769053117782910966582,
 
-    pValue: 0.23056556843894693,
+    pValue: 0.22661539838413605,
     testValue: -1.313064328597225660644,
 
     confidence: [
-      -1.80084417807539,
-      1.80084417807539
+      -1.7653291692417925,
+      1.7653291692417925
     ]
   });
 
@@ -66,12 +66,12 @@ test('testing less alternative', function (t) {
     valid: true,
     freedom: 7.769053117782910966582,
 
-    pValue: 0.11528278421947352,
+    pValue: 0.11330769919206803,
     testValue: -1.313064328597225660644,
 
     confidence: [
       -Infinity,
-      1.4428680787589634
+      1.4216665293566955
     ]
   });
 
@@ -90,11 +90,11 @@ test('testing greater alternative', function (t) {
     valid: true,
     freedom: 7.769053117782910966582,
 
-    pValue: 0.8847172157805265,
+    pValue: 0.8866923008079319,
     testValue: -1.313064328597225660644,
 
     confidence: [
-      -1.4428680787589634,
+      -1.4216665293566955,
       Infinity
     ]
   });
