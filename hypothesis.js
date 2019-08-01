@@ -69,7 +69,7 @@ function hypothesis(left, right, options) {
 
   // Vertify mu option
   if (typeof options.mu !== 'number') {
-    throw new TypeError('alpha option must be a number');
+    throw new TypeError('mu option must be a number');
   }
 
   // Vertify varEqual option
@@ -82,12 +82,12 @@ function hypothesis(left, right, options) {
     throw new TypeError('alpha option must be a number');
   }
   if (options.alpha >= 1) {
-    throw new RangeError('alpha must be bellow 1.0');
+    throw new RangeError('alpha must be below 1.0');
   }
 
   // Vertify alternative option
-  if (typeof options.alternative === undefined) {
-    throw new Error('alternative must be either not equal, less or greater');
+  if (typeof options.alternative === 'undefined') {
+    throw new Error('alternative must be either "not equal", "less" or "greater"');
   }
 
   // Perform the student's t test
