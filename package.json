@@ -17,7 +17,7 @@
   ],
   "dependencies": {
     "summary": "0.3.x",
-    "distributions": "^2.0.0"
+    "distributions": "^2.1.0"
   },
   "devDependencies": {
     "eslint": "^3.2.2",
