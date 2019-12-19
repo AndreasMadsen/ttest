@@ -10,16 +10,18 @@ AbstactStudentT.prototype.testValue = function () {
   return diff / this._se;
 };
 
+// Use cdf(-t) instead of 1 - cdf(t), and cdf(-|t|) instead of 1 - cdf(|t|)
+// to avoid a numerical error when computing 1 - epsilon.
 AbstactStudentT.prototype.pValue = function () {
   const t = this.testValue();
 
   switch (this._options.alternative) {
   case 1: // mu > mu[0]
-    return 1 - this._dist.cdf(t);
+    return this._dist.cdf(-t);
   case -1: // mu < mu[0]
     return this._dist.cdf(t);
   case 0: // mu != mu[0]
-    return 2 * (1 - this._dist.cdf(Math.abs(t)));
+    return 2 * (this._dist.cdf(-Math.abs(t)));
   }
 };
 
