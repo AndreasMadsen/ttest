@@ -165,7 +165,7 @@ test('numerical error when p is close to zero', function (t) {
 
   equals(t, res, {
     valid: false,
-    freedom: 124.7869831567338,
+    freedom: 124.78698315673383,
 
     pValue: 9.192938947804553e-20,
     testValue: -10.865820339325207,

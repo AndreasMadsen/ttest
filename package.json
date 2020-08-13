@@ -5,7 +5,7 @@
   "author": "Andreas Madsen <amwebdk@gmail.com>",
   "main": "./hypothesis.js",
   "scripts": {
-    "test": "tap test/simple/* && eslint ."
+    "test": "tap test/simple/*"
   },
   "repository": {
     "type": "git",
@@ -16,12 +16,11 @@
     "student t"
   ],
   "dependencies": {
-    "summary": "0.3.x",
+    "summary": "^2.0.0",
     "distributions": "^2.1.0"
   },
   "devDependencies": {
-    "eslint": "^6.7.2",
-    "tap": "^12.7.0"
+    "tap": "^14.0.0"
   },
   "license": "MIT"
 }
