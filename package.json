@@ -4,6 +4,7 @@
   "version": "3.0.0",
   "author": "Andreas Madsen <amwebdk@gmail.com>",
   "main": "./hypothesis.js",
+  "types": "./hypothesis.d.ts",
   "scripts": {
     "test": "tap test/simple/*"
   },
