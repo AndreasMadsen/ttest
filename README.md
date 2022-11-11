@@ -62,7 +62,7 @@ const options = {
   // Default "not equal"
   // What should the alternative hypothesis be:
   // - One sample case: could the mean be less, greater or not equal to mu property.
-  // - Two sample case: could the mean diffrence be less, greater or not equal to mu property.
+  // - Two sample case: could the mean difference be less, greater or not equal to mu property.
   alternative: "less" || "greater" || "not equal"
 };
 ```
